@@ -4,9 +4,111 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Code Quiz</title>
+    <link rel = "stylesheet" href="assets/css/style.css"></link>
 </head>
 <body>
-    
+    <!-- <a></a> This link needs to class highscores -->
+    <!--With JS, I need add timer to the upper right hand corner-->
+
+    <!--Needs to disappear after clicking startQuiz-->
+    <div class = "startingPage"> 
+        <header>
+            <h1>Coding Quiz Challenge</h1>   
+        </header>
+        <p>
+            This is where I will write the instructions for the game
+        </p>
+        <button type="button" id="startQuiz">Start Quiz</button>
+    </div>
+
+    <!--Needs to stay hidden, then appear after clicking startQuiz-->
+    <div class = "question1">
+        <h2>This is where I will ask the first question</h2>
+        <div class= "questionBtns">
+            <button type="button">1. Answer 1</button>
+            <button type="button">2. Answer 2</button>
+            <button type="button">3. Answer 3</button>
+            <button type="button">4. Answer 4</button>
+            <div class="feedback">
+                <p id="correct">Correct!</p>
+                <p id="wrong">Wrong!</p>
+            </div>
+        </div>
+    </div>
+
+     <!--Needs to stay hidden, then appear after clicking question1_Btns-->
+    <div class = "question2">
+        <h2>This is where I will ask the second question</h2>
+        <div class= "questionBtns">
+            <button type="button">1. Answer 1</button>
+            <button type="button">2. Answer 2</button>
+            <button type="button">3. Answer 3</button>
+            <button type="button">4. Answer 4</button>
+            <div class="feedback">
+                <p id="correct">Correct!</p>
+                <p id="wrong">Wrong!</p>
+            </div>
+        </div>
+    </div>
+
+    <!--Needs to stay hidden, then appear after clicking question2_Btns-->
+    <div class = "question3">
+        <h2>This is where I will ask the third question</h2>
+        <div class= "questionBtns">
+            <button type="button">1. Answer 1</button>
+            <button type="button">2. Answer 2</button>
+            <button type="button">3. Answer 3</button>
+            <button type="button">4. Answer 4</button>
+            <div class="feedback">
+                <p id="correct">Correct!</p>
+                <p id="wrong">Wrong!</p>
+            </div>
+        </div>
+    </div>
+
+    <!--Needs to stay hidden, then appear after clicking question3_Btns-->
+    <div class = "question4">
+        <h2>This is where I will ask the fourth question</h2>
+        <div class= "questionBtns">
+            <button type="button">1. Answer 1</button>
+            <button type="button">2. Answer 2</button>
+            <button type="button">3. Answer 3</button>
+            <button type="button">4. Answer 4</button>
+            <div class="feedback">
+                <p id="correct">Correct!</p>
+                <p id="wrong">Wrong!</p>
+            </div>
+        </div>
+    </div>
+
+    <!--Needs to stay hidden, then appear after clicking question4_Btns-->
+    <div class = "allDone">
+        <h3>All Done!</h3>
+        <p>Your final score is [output of some variable]</p>
+        <form id="doneForm">
+            <!--The 'for' and 'id' = initials is to link them to each other-->
+            <label for="initials">Enter Initials:</label>
+            <input type="text" id="initals">
+            <input class ="btn" type= "submit" id="submitBtn" form="doneForm"> <!--Might need a formaction attribute with URL value t.ly/gCSq -->
+        </form>
+    </div>
+
+     <!--Needs to stay hidden, then appear after submitting '.btn'-->
+    <div class="highscores">
+        <form id="highscoresList">
+            <h3>Highscores</h3>
+            <!--Need to target what is submitted in doneForm-->
+            <div ></div> <!--Might need to populate answers here with append on JS-->
+            <div class="highscoreBtns">
+                <!--Back Button, needs to travel to class startingPage-->
+                <button type="button" class="back"> Back </button>
+                <!--Reset highscores button-->
+                <button type="reset" class="clearForm">Clear High Scores</button>
+            </div>
+        </form>
+    </div>
+
+    <script src= "./assets/script/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+* {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+body {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color:rgb(20, 18, 18);
+}
+
+
+.startingPage, 
+.question1, 
+.question2, 
+.question3, 
+.question4, 
+.allDone, 
+.highscores {
+    margin: auto;
+    width: 60%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.startingPage p {
+    text-align: center;
+    font-size: 1rem;
+}
+
+#startQuiz {
+    display:block;
+    margin: auto;
+    text-align: center;
+    width: 30%;
+    
+}
+
+h2 {
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+.questionBtns {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 40%;
+    text-align: left;
+    margin-left: 0px;
+}
+
+button, #submitBtn {
+    background-color: rgb(91, 39, 139);
+    border-radius: 5px;
+    font-weight:bold;
+    color: white;
+    
+}
+
+button:hover, #submitBtn:hover {
+    border: rgb(197, 41, 197) 4px solid;
+}
+
+button:active, #submitBtn:active {
+    opacity: 50%;
+}
+
+h3 {
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.allDone {
+    text-align: center;
+}
+
+#doneForm {
+    margin-left: 0px;
+}
+
+.highscoreBtns {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
