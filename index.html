@@ -11,8 +11,7 @@
     <!-- <a></a> This link needs to class highscores -->
     <!--With JS, I need add timer to the upper right hand corner-->
 
-    <!--Needs to disappear after clicking startQuiz-->
-    <div class = "startingPage"> 
+    <div class = "startingPage reveal"> 
         <header>
             <h1>Coding Quiz Challenge</h1>   
         </header>
@@ -22,8 +21,8 @@
         <button type="button" id="startQuiz">Start Quiz</button>
     </div>
 
-    <!--Needs to stay hidden, then appear after clicking startQuiz-->
-    <div class = "question1">
+
+    <div class = "question1 hide">
         <h2>This is where I will ask the first question</h2>
         <div class= "questionBtns">
             <button type="button">1. Answer 1</button>
@@ -31,14 +30,14 @@
             <button type="button">3. Answer 3</button>
             <button type="button">4. Answer 4</button>
             <div class="feedback">
-                <p id="correct">Correct!</p>
-                <p id="wrong">Wrong!</p>
+                <p id="correct" class="hide">Correct!</p>
+                <p id="wrong" class="hide">Wrong!</p>
             </div>
         </div>
     </div>
 
-     <!--Needs to stay hidden, then appear after clicking question1_Btns-->
-    <div class = "question2">
+   
+    <div class = "question2 hide">
         <h2>This is where I will ask the second question</h2>
         <div class= "questionBtns">
             <button type="button">1. Answer 1</button>
@@ -46,14 +45,14 @@
             <button type="button">3. Answer 3</button>
             <button type="button">4. Answer 4</button>
             <div class="feedback">
-                <p id="correct">Correct!</p>
-                <p id="wrong">Wrong!</p>
+                <p id="correct" class="hide">Correct!</p>
+                <p id="wrong" class="hide">Wrong!</p>
             </div>
         </div>
     </div>
 
-    <!--Needs to stay hidden, then appear after clicking question2_Btns-->
-    <div class = "question3">
+
+    <div class = "question3 hide">
         <h2>This is where I will ask the third question</h2>
         <div class= "questionBtns">
             <button type="button">1. Answer 1</button>
@@ -61,14 +60,13 @@
             <button type="button">3. Answer 3</button>
             <button type="button">4. Answer 4</button>
             <div class="feedback">
-                <p id="correct">Correct!</p>
-                <p id="wrong">Wrong!</p>
+                <p id="correct" class="hide">Correct!</p>
+                <p id="wrong" class="hide">Wrong!</p>
             </div>
         </div>
     </div>
 
-    <!--Needs to stay hidden, then appear after clicking question3_Btns-->
-    <div class = "question4">
+    <div class = "question4 hide">
         <h2>This is where I will ask the fourth question</h2>
         <div class= "questionBtns">
             <button type="button">1. Answer 1</button>
@@ -76,14 +74,13 @@
             <button type="button">3. Answer 3</button>
             <button type="button">4. Answer 4</button>
             <div class="feedback">
-                <p id="correct">Correct!</p>
-                <p id="wrong">Wrong!</p>
+                <p id="correct" class="hide">Correct!</p>
+                <p id="wrong" class="hide">Wrong!</p>
             </div>
         </div>
     </div>
 
-    <!--Needs to stay hidden, then appear after clicking question4_Btns-->
-    <div class = "allDone">
+    <div class = "allDone hide">
         <h3>All Done!</h3>
         <p>Your final score is [output of some variable]</p>
         <form id="doneForm">
@@ -94,14 +91,12 @@
         </form>
     </div>
 
-     <!--Needs to stay hidden, then appear after submitting '.btn'-->
-    <div class="highscores">
+    <div class="highscores hide"> 
         <form id="highscoresList">
             <h3>Highscores</h3>
             <!--Need to target what is submitted in doneForm-->
             <div ></div> <!--Might need to populate answers here with append on JS-->
             <div class="highscoreBtns">
-                <!--Back Button, needs to travel to class startingPage-->
                 <button type="button" class="back"> Back </button>
                 <!--Reset highscores button-->
                 <button type="reset" class="clearForm">Clear High Scores</button>
