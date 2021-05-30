@@ -9,24 +9,14 @@ body {
     color:rgb(20, 18, 18);
 }
 
-
-.startingPage, 
-.question1, 
-.question2, 
-.question3, 
-.question4, 
-.allDone, 
-.highscores {
-    margin: auto;
-    width: 60%;
-}
-
 .hide {
     display: none; 
 }
 
 .reveal {
     display: block;
+    margin: auto;
+    width: 45%;
 }
 
 h1 {
@@ -37,6 +27,9 @@ h1 {
 .startingPage p {
     text-align: center;
     font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 40px;
 }
 
 #startQuiz {
@@ -44,7 +37,6 @@ h1 {
     margin: auto;
     text-align: center;
     width: 30%;
-    
 }
 
 h2 {
@@ -56,12 +48,12 @@ h2 {
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 40%;
+    width: 200px;
     text-align: left;
     margin-left: 0px;
 }
 
-button, #submitBtn {
+button, input[type=button], #submitBtn {
     background-color: rgb(91, 39, 139);
     border-radius: 5px;
     font-weight:bold;
@@ -69,17 +61,37 @@ button, #submitBtn {
     
 }
 
-button:hover, #submitBtn:hover {
+button:hover, input[type=button]:hover, #submitBtn:hover {
     border: rgb(197, 41, 197) 4px solid;
+    cursor: pointer;
 }
 
 button:active, #submitBtn:active {
     opacity: 50%;
 }
 
+.right p {
+    text-align: left;
+    font-style: italic ;
+    font-size: 1.2rem;
+    margin: auto;
+    border-top: 2px solid gray;
+    width: 100%;
+}
+
+.wrong p, {
+    text-align: left;
+    color: "red";
+    font-style: italic ;
+    font-size: 1.2rem;
+    margin-left: -12px;
+    border-top: 2px solid gray;
+    width: 100%;
+} 
+
 h3 {
     font-size: 1.3rem;
-    text-align: center;
+    text-align: left;
 }
 
 .allDone {
@@ -95,5 +107,5 @@ h3 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
