@@ -1,3 +1,4 @@
+var viewHS = document.querySelector(".viewHS");
 var start = document.querySelector(".startingPage");
 var q1 = document.querySelector(".question1");
 var q2 = document.querySelector(".question2");
@@ -6,28 +7,42 @@ var q4 = document.querySelector(".question4");
 var q5 = document.querySelector(".question5")
 var finish = document.querySelector(".allDone");
 var goBack = document.querySelector(".back");
+var initials = document.querySelector(".allDone");
 var scoresList = document.querySelector(".highscores");
-
-// var rightAns = document.querySelector(".right");
-// var wrongAns = document.querySelector(".wrong");
 
 var mode = "reveal";
 
+//Linking Viewhighscores to Highscores page
+
+viewHS.addEventListener("click", function(e){
+    
+    scoresList.setAttribute("class", "reveal");
+
+    if(mode === "reveal"){
+        start.setAttribute("class", "hide");
+        q1.setAttribute("class", "hide");
+        q2.setAttribute("class", "hide");
+        q3.setAttribute("class", "hide");
+        q4.setAttribute("class", "hide");
+        q5.setAttribute("class", "hide");
+        finish.setAttribute("class", "hide");
+        initials.setAttribute("class", "hide");
+    };
+});
 
 //Checking for correct answer, syntax at t.ly/T76D
-
 var buttons = document.querySelectorAll("input[type=button]");
 console.log(buttons);
-
+//Loop adds event listener to every item in array of "buttons"
 for (let index = 0; index < buttons.length; index++) {
-   buttons[index].addEventListener("click", checkCorrect);
+   buttons[index].addEventListener("click", checkCorrect); //checkCorrect executes the function
 }
 
 var questionNum = 1;
 
 function checkCorrect() {
     if(this.id === "correct") {
-        console.log(buttons.id + "  correct"); 
+        console.log(this.id); // returns the specific buttons' id(correct or incorrect)
         if(questionNum === 1) {
            document.querySelector("#right1").setAttribute("class", "reveal");
         } else if (questionNum === 2) {
@@ -40,7 +55,7 @@ function checkCorrect() {
             document.querySelector("#right5").setAttribute("class", "reveal");
         };
     } else {
-        console.log(buttons.id + "  incorrect");
+        console.log(this.id);
         if(questionNum === 1){
             document.querySelector("#wrong1").setAttribute("class", "reveal");
         } else if (questionNum === 2) {
@@ -54,7 +69,6 @@ function checkCorrect() {
         };
     };
     questionNum++; //this changes the question number by 1
-    console.log(this.id);// returns the specific buttons' id(correct or incorrect)
 };
 
 // Starting Page

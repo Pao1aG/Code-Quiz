@@ -9,14 +9,32 @@ body {
     color:rgb(20, 18, 18);
 }
 
-.hide {
-    display: none; 
+.viewHS {
+    margin-top: -20px;
+}
+
+.viewHS a{
+    color:rgb(91, 39, 139);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.viewHS:hover {
+    cursor:pointer;
+}
+
+.viewHS:active {
+    opacity:50%;
 }
 
 .reveal {
     display: block;
     margin: auto;
     width: 45%;
+}
+
+.hide {
+    display: none; 
 }
 
 h1 {
@@ -70,23 +88,31 @@ button:active, #submitBtn:active {
     opacity: 50%;
 }
 
-.right p {
+#right1 p,
+#right2 p,
+#right3 p,
+#right4 p,
+#right5 p {
     text-align: left;
     font-style: italic ;
     font-size: 1.2rem;
-    margin: auto;
+    margin-left: -250px;
     border-top: 2px solid gray;
-    width: 100%;
+    width: 700px;
 }
 
-.wrong p, {
+#wrong1 p,
+#wrong2 p,
+#wrong3 p, 
+#wrong4 p,
+#wrong5 p {
     text-align: left;
-    color: "red";
+    color: red;
     font-style: italic ;
     font-size: 1.2rem;
-    margin-left: -12px;
+    margin-left: -250px;
     border-top: 2px solid gray;
-    width: 100%;
+    width: 700px;
 } 
 
 h3 {
