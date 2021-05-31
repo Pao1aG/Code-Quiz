@@ -37,15 +37,18 @@ viewHS.addEventListener("click", function(e){
 //Adding timer function
 var secondsLeft = 60;
 
-function startTimer() {
-    var timerInterval = setInterval(function () { //this function will decrease secondsLeft
-        secondsLeft--;
-        countTxt.textContent= secondsLeft; //this sets the counter to 60
-   }, 1000);
+var timerInterval = setInterval(startTimer, 1000);
 
-     if(secondsLeft === 0) { //this will stop the timer when it reaches 0
-        clearInterval(timerInterval);
-    };
+function startTimer() {
+    secondsLeft--;
+    countTxt.textContent= secondsLeft; //this sets the counter to 60
+   
+    //This stops counter from going to negative t.ly/646Q 
+    //Also stops timer when reaching the AllDone page
+   if(secondsLeft <=0 || finish.className === "reveal"){ 
+       clearInterval(timerInterval);
+       return;
+   };
 };
 
 //Adding decrease time function for incorrect answers
@@ -53,6 +56,10 @@ function startTimer() {
 function decreaseTimer() {
     secondsLeft = secondsLeft-10;
     countTxt.textContent= secondsLeft;
+
+    if((secondsLeft) <= 0){
+        return;
+    };
 };
 
 //Checking for correct answer, syntax at t.ly/T76D
@@ -186,11 +193,26 @@ q5.addEventListener("click", function(e){
             finish.setAttribute("class", "reveal");
         },2000);
     };
+
+   
 });
+
+// Function to append initials to scoresList
+
+function initialsAdd () {
+    var list = document.createElement("p");
+    document.querySelector(".initialList").appendChild(list);
+    var listValue = document.querySelector("input[type=text]");
+    console.log(listValue.value);
+    list.appendChild(listValue);
+
+};
 
 // Add Initials
 finish.addEventListener("submit", function(e){
     e.preventDefault();
+
+    initialsAdd();//appends text field
 
     mode = "reveal";
 
@@ -200,6 +222,7 @@ finish.addEventListener("submit", function(e){
         scoresList.setAttribute("class", "reveal");
     }
 });
+
 
 // Highscores Page, Back Button
 goBack.addEventListener("click", function(e){
