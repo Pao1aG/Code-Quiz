@@ -1,4 +1,6 @@
 var viewHS = document.querySelector(".viewHS");
+var timer = document.querySelector(".timer");
+var countTxt = document.querySelector("#count")
 var start = document.querySelector(".startingPage");
 var q1 = document.querySelector(".question1");
 var q2 = document.querySelector(".question2");
@@ -7,28 +9,51 @@ var q4 = document.querySelector(".question4");
 var q5 = document.querySelector(".question5")
 var finish = document.querySelector(".allDone");
 var goBack = document.querySelector(".back");
-var initials = document.querySelector(".allDone");
 var scoresList = document.querySelector(".highscores");
 
 var mode = "reveal";
 
-//Linking Viewhighscores to Highscores page
+//Linking View Highscores to Highscores page with function
+function go2HS() {
+    start.setAttribute("class", "hide")
+    q1.setAttribute("class", "hide");
+    q2.setAttribute("class", "hide");
+    q3.setAttribute("class", "hide");
+    q4.setAttribute("class", "hide");
+    q5.setAttribute("class", "hide");
+    finish.setAttribute("class", "hide");
+};
 
 viewHS.addEventListener("click", function(e){
+
+    e.preventDefault();
     
     scoresList.setAttribute("class", "reveal");
 
-    if(mode === "reveal"){
-        start.setAttribute("class", "hide");
-        q1.setAttribute("class", "hide");
-        q2.setAttribute("class", "hide");
-        q3.setAttribute("class", "hide");
-        q4.setAttribute("class", "hide");
-        q5.setAttribute("class", "hide");
-        finish.setAttribute("class", "hide");
-        initials.setAttribute("class", "hide");
-    };
+    go2HS();
 });
+
+
+//Adding timer function
+var secondsLeft = 60;
+
+function startTimer() {
+    var timerInterval = setInterval(function () { //this function will decrease secondsLeft
+        secondsLeft--;
+        countTxt.textContent= secondsLeft; //this sets the counter to 60
+   }, 1000);
+
+     if(secondsLeft === 0) { //this will stop the timer when it reaches 0
+        clearInterval(timerInterval);
+    };
+};
+
+//Adding decrease time function for incorrect answers
+
+function decreaseTimer() {
+    secondsLeft = secondsLeft-10;
+    countTxt.textContent= secondsLeft;
+};
 
 //Checking for correct answer, syntax at t.ly/T76D
 var buttons = document.querySelectorAll("input[type=button]");
@@ -58,14 +83,19 @@ function checkCorrect() {
         console.log(this.id);
         if(questionNum === 1){
             document.querySelector("#wrong1").setAttribute("class", "reveal");
+            decreaseTimer();
         } else if (questionNum === 2) {
             document.querySelector("#wrong2").setAttribute("class", "reveal");
+            decreaseTimer();
         } else if (questionNum === 3) {
             document.querySelector("#wrong3").setAttribute("class", "reveal");
+            decreaseTimer();
         } else if (questionNum === 4) {
             document.querySelector("#wrong4").setAttribute("class", "reveal");
+            decreaseTimer();
         } else if (questionNum === 5) {
             document.querySelector("#wrong5").setAttribute("class", "reveal");
+            decreaseTimer();
         };
     };
     questionNum++; //this changes the question number by 1
@@ -74,6 +104,9 @@ function checkCorrect() {
 // Starting Page
 start.addEventListener("click", function(e) {
     e.preventDefault();
+
+    startTimer();
+
     if (mode === "reveal") {
         mode = "hide";
         start.setAttribute("class", "hide");
