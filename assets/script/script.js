@@ -40,8 +40,10 @@ var secondsLeft = 60;
 var timerInterval = setInterval(startTimer, 1000);
 
 function startTimer() {
-    secondsLeft--;
-    countTxt.textContent= secondsLeft; //this sets the counter to 60
+   if(start.className === "hide"){ //this prevents timer from starting before clicking button
+       secondsLeft--;
+       countTxt.textContent= secondsLeft; //this sets the counter to 60
+   };
    
     //This stops counter from going to negative t.ly/646Q 
     //Also stops timer when reaching the AllDone page
