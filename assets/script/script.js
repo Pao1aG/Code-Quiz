@@ -53,8 +53,7 @@ function startTimer() {
    };
 };
 
-//Adding decrease time function for incorrect answers
-
+//Decrease time function for incorrect answers
 function decreaseTimer() {
     secondsLeft = secondsLeft-10;
     countTxt.textContent= secondsLeft;
@@ -114,7 +113,7 @@ function checkCorrect() {
 start.addEventListener("click", function(e) {
     e.preventDefault();
 
-    startTimer();
+    startTimer();// excutes the timer function
 
     if (mode === "reveal") {
         mode = "hide";
@@ -200,14 +199,15 @@ q5.addEventListener("click", function(e){
 });
 
 // Function to append initials to scoresList
-
 function initialsAdd () {
-    var list = document.createElement("p");
-    document.querySelector(".initialList").appendChild(list);
-    var listValue = document.querySelector("input[type=text]");
+    var list = document.createElement("li");
+    document.querySelector(".initialList").append(list);
+    var listValue = document.querySelector("input[type=text]").value;//submitted initials
     console.log(listValue.value);
-    list.appendChild(listValue);
+    list.append(listValue);
 
+    var timeValue = document.querySelector("#count");
+    list.append("  ---- ",timeValue);
 };
 
 // Add Initials
