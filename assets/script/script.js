@@ -8,8 +8,9 @@ var q3 = document.querySelector(".question3");
 var q4 = document.querySelector(".question4");
 var q5 = document.querySelector(".question5")
 var finish = document.querySelector(".allDone");
-var goBack = document.querySelector(".back");
 var scoresList = document.querySelector(".highscores");
+var goBack = document.querySelector(".back");
+var resetHS = document.querySelector(".clearForm");
 
 var mode = "reveal";
 
@@ -198,9 +199,9 @@ q5.addEventListener("click", function(e){
    
 });
 
-// Function to append initials to scoresList
+// Function to append initials to scoresList (explanation t.ly/18gK)
 function initialsAdd () {
-    var list = document.createElement("li");
+    var list = document.createElement("li"); //resource for createElement t.ly/g7NM 
     document.querySelector(".initialList").append(list);
     var listValue = document.querySelector("input[type=text]").value;//submitted initials
     console.log(listValue.value);
@@ -214,7 +215,7 @@ function initialsAdd () {
 finish.addEventListener("submit", function(e){
     e.preventDefault();
 
-    initialsAdd();//appends text field
+    initialsAdd();//appends text into highscores list
 
     mode = "reveal";
 
@@ -236,6 +237,13 @@ goBack.addEventListener("click", function(e){
     };
 });
 ``
+//Reset Highscores
+resetHS.addEventListener("click", function(e){
+    e.preventDefault();
+
+    document.querySelector(".initialList").remove();//this removes the ul of initialList t.ly/MplN
+    
+});
 
 
 
