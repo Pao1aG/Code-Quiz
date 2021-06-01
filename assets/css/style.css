@@ -152,6 +152,10 @@ h3 {
     margin-left: 0px;
 }
 
+.initialList {
+    margin-left: -14px;
+}
+
 .highscoreBtns {
     width: auto;
     display: flex;

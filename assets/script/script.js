@@ -202,9 +202,9 @@ q5.addEventListener("click", function(e){
 // Function to append initials to scoresList (explanation t.ly/18gK)
 function initialsAdd () {
     var list = document.createElement("li"); //resource for createElement t.ly/g7NM 
+    list.setAttribute("style", "background-color: rgb(91, 39, 139); width: 300px; border-radius:10px; opacity: 80%; font-weight: bold; color: white ");
     document.querySelector(".initialList").append(list);
     var listValue = document.querySelector("input[type=text]").value;//submitted initials
-    console.log(listValue.value);
     list.append(listValue);
 
     var timeValue = document.querySelector("#count");
@@ -242,7 +242,6 @@ resetHS.addEventListener("click", function(e){
     e.preventDefault();
 
     document.querySelector(".initialList").remove();//this removes the ul of initialList t.ly/MplN
-    
 });
 
 
