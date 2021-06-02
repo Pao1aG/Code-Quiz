@@ -14,6 +14,7 @@ var resetHS = document.querySelector(".clearForm");
 
 var mode = "reveal";
 
+
 //Linking View Highscores to Highscores page with function
 function go2HS() {
     start.setAttribute("class", "hide")
@@ -23,6 +24,8 @@ function go2HS() {
     q4.setAttribute("class", "hide");
     q5.setAttribute("class", "hide");
     finish.setAttribute("class", "hide");
+    //add function here to show saved scores
+    // savedScores();
 };
 
 viewHS.addEventListener("click", function(e){
@@ -48,8 +51,15 @@ function startTimer() {
    
     //This stops counter from going to negative t.ly/646Q 
     //Also stops timer when reaching the AllDone page
+    //And when timer stops from any page, it leads to AllDone page
    if(secondsLeft <=0 || finish.className === "reveal"){ 
        clearInterval(timerInterval);
+       q1.setAttribute("class", "hide");
+       q2.setAttribute("class", "hide");
+       q3.setAttribute("class", "hide");
+       q4.setAttribute("class", "hide");
+       q5.setAttribute("class", "hide");
+       finish.setAttribute("class", "reveal");
        return;
    };
 };
@@ -112,15 +122,16 @@ function checkCorrect() {
 
 // Starting Page
 start.addEventListener("click", function(e) {
+    // debugger
     e.preventDefault();
-
-    startTimer();// excutes the timer function
 
     if (mode === "reveal") {
         mode = "hide";
         start.setAttribute("class", "hide");
         q1.setAttribute("class", "reveal");
     } 
+
+    startTimer();// excutes the timer function
 });
 
 // Question 1
@@ -206,9 +217,11 @@ function initialsAdd () {
     document.querySelector(".initialList").append(list);
     var listValue = document.querySelector("input[type=text]").value;//submitted initials
     list.append(listValue);
+    console.log(listValue);
 
     var timeValue = document.querySelector("#count");
     list.append("  ---- ",timeValue);
+
 };
 
 // Add Initials
@@ -216,14 +229,18 @@ finish.addEventListener("submit", function(e){
     e.preventDefault();
 
     initialsAdd();//appends text into highscores list
-
+ 
     mode = "reveal";
 
     if (mode === "reveal") {
         mode === "hide";
         finish.setAttribute("class", "hide");
         scoresList.setAttribute("class", "reveal");
-    }
+        
+        saveScores();
+        displayScores();
+    };
+
 });
 
 
@@ -242,7 +259,57 @@ resetHS.addEventListener("click", function(e){
     e.preventDefault();
 
     document.querySelector(".initialList").remove();//this removes the ul of initialList t.ly/MplN
+    //need to add to function to clear local storage here too
+    
 });
+
+//Local Storage Functions
+var savedScoresArray = [];
+
+function saveScores() {
+  //  debugger
+    if(scoresList.className === "reveal") {
+        var userScore = {
+            initials: document.querySelector("input[type=text]").value, //same as intialList
+            timeScore: secondsLeft
+        };
+        // console.log("Initials: " + userScore.initials + " , Timescore: " + userScore.timeScore + " , JSON Stringify: " + JSON.stringify(userScore));
+       
+        localStorage.setItem("userScore", JSON.stringify(userScore)); //turns to string
+       
+    };
+};
+
+function displayScores() {
+   // debugger
+    
+    var savedScores = JSON.parse(localStorage.getItem("userScore")); //turns back to object
+
+    console.log(savedScores); 
+
+    var tempObj = {name: savedScores.initials, score: savedScores.timeScore}; // places values of saved scores into new object
+    savedScoresArray.push(tempObj); //pushes this into the array
+
+    var highScoresUl = document.querySelector(".highscoresList");
+    var highscoresTxt = document.querySelector("#highscoresTxt");
+    highscoresTxt.innerHTML= "";
+
+    if (savedScoresArray !== null) {
+        highScoresUl.setAttribute("class", "reveal");
+
+        //For loop to create li for every saved entry
+        for (var index = 0; index < savedScoresArray.length; index ++) {
+            var user = savedScoresArray[index].name + " ---- " + savedScoresArray[index].score; //in the array, get name and score values
+        };
+
+        var userList = document.createElement("li");
+        userList.textContent= user;
+
+        highScoresUl.append(userList); //add the values in user to li
+    } else {
+        return;
+    }
+};
 
 
 

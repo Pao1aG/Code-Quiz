@@ -122,12 +122,15 @@
     </div>
 
     <div class="highscores hide"> 
-        <form id="highscoresList">
+        <form>
             <h3>Highscores</h3>
             <!--Need to target what is submitted in doneForm-->
             <div> 
-                <ul class="initialList"> </ul>
-            </div> <!--Might need to populate answers here with append on JS-->
+                <ul class="initialList"></ul>
+            </div> 
+            <div class= "highscoresList hide">
+                <ul id="highscoresTxt"> Test Content</ul>
+            </div>
             <div class="highscoreBtns"> 
                 <button type="button" class="back"> Back </button>
                 <!--Reset highscores button-->
