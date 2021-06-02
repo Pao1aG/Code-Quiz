@@ -212,6 +212,8 @@ q5.addEventListener("click", function(e){
 
 // Function to append initials to scoresList (explanation t.ly/18gK)
 function initialsAdd () {
+    document.querySelector(".initialList").innerHTML= "Your Highscore";
+
     var list = document.createElement("li"); //resource for createElement t.ly/g7NM 
     list.setAttribute("style", "background-color: rgb(91, 39, 139); width: 300px; border-radius:10px; opacity: 80%; font-weight: bold; color: white ");
     document.querySelector(".initialList").append(list);
@@ -287,15 +289,23 @@ function displayScores() {
 
     console.log(savedScores); 
 
-    var tempObj = {name: savedScores.initials, score: savedScores.timeScore}; // places values of saved scores into new object
-    savedScoresArray.push(tempObj); //pushes this into the array
+    var scoresObj = {name: savedScores.initials, score: savedScores.timeScore}; // places values of saved scores into new object
+    savedScoresArray.push(scoresObj); //pushes this into the array
+
+    //this part is experiment for past scores. Maybe put in saveScores function instead
+    localStorage.setItem("scoresObj", JSON.stringify(scoresObj));
+    var scoresObjAdd = JSON.parse(localStorage.getItem("scoresObj"));
+    savedScoresArray.push(scoresObjAdd);
+    console.log(savedScoresArray);
+    //experiment ends here
 
     var highScoresUl = document.querySelector(".highscoresList");
-    var highscoresTxt = document.querySelector("#highscoresTxt");
-    highscoresTxt.innerHTML= "";
-
+    highScoresUl.innerHTML= "~Past Highscores~";
+    // var highscoresTxt = document.querySelector("#highscoresTxt");
+   
     if (savedScoresArray !== null) {
         highScoresUl.setAttribute("class", "reveal");
+        highScoresUl.setAttribute("style", "background-color: teal; opacity:85%; font-weight:bold; color:white; width: 300px; margin-left:18px; border-radius:5px;")
 
         //For loop to create li for every saved entry
         for (var index = 0; index < savedScoresArray.length; index ++) {
