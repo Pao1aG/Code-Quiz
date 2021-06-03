@@ -15,7 +15,7 @@ var resetHS = document.querySelector(".clearForm");
 var mode = "reveal";
 
 
-//Linking View Highscores to Highscores page with function
+//Linking View Highscores to Highscores page 
 function go2HS() {
     start.setAttribute("class", "hide")
     q1.setAttribute("class", "hide");
@@ -24,19 +24,19 @@ function go2HS() {
     q4.setAttribute("class", "hide");
     q5.setAttribute("class", "hide");
     finish.setAttribute("class", "hide");
-    //add function here to show saved scores
-    // savedScores();
 };
 
 viewHS.addEventListener("click", function(e){
-
     e.preventDefault();
+   
+    go2HS();
     
     scoresList.setAttribute("class", "reveal");
 
-    go2HS();
-});
+    clearInterval(timerInterval);
 
+    displayScores();
+});
 
 //Adding timer function
 var secondsLeft = 60;
@@ -50,7 +50,7 @@ function startTimer() {
    };
    
     //This stops counter from going to negative t.ly/646Q 
-    //Also stops timer when reaching the AllDone page
+    //Also stops timer when reaching the AllDone or scoresList page
     //And when timer stops from any page, it leads to AllDone page
    if(secondsLeft <=0 || finish.className === "reveal"){ 
        clearInterval(timerInterval);
@@ -76,17 +76,16 @@ function decreaseTimer() {
 
 //Checking for correct answer, syntax at t.ly/T76D
 var buttons = document.querySelectorAll("input[type=button]");
-console.log(buttons);
 //Loop adds event listener to every item in array of "buttons"
 for (let index = 0; index < buttons.length; index++) {
    buttons[index].addEventListener("click", checkCorrect); //checkCorrect executes the function
-}
+};
 
 var questionNum = 1;
 
 function checkCorrect() {
     if(this.id === "correct") {
-        console.log(this.id); // returns the specific buttons' id(correct or incorrect)
+        //console.log(this.id); // returns the specific buttons' id(correct or incorrect)
         if(questionNum === 1) {
            document.querySelector("#right1").setAttribute("class", "reveal");
         } else if (questionNum === 2) {
@@ -99,7 +98,7 @@ function checkCorrect() {
             document.querySelector("#right5").setAttribute("class", "reveal");
         };
     } else {
-        console.log(this.id);
+        //console.log(this.id);
         if(questionNum === 1){
             document.querySelector("#wrong1").setAttribute("class", "reveal");
             decreaseTimer();
@@ -122,14 +121,13 @@ function checkCorrect() {
 
 // Starting Page
 start.addEventListener("click", function(e) {
-    // debugger
     e.preventDefault();
 
     if (mode === "reveal") {
         mode = "hide";
         start.setAttribute("class", "hide");
         q1.setAttribute("class", "reveal");
-    } 
+    };
 
     startTimer();// excutes the timer function
 });
@@ -206,8 +204,6 @@ q5.addEventListener("click", function(e){
             finish.setAttribute("class", "reveal");
         },2000);
     };
-
-   
 });
 
 // Function to append initials to scoresList (explanation t.ly/18gK)
@@ -219,14 +215,12 @@ function initialsAdd () {
     document.querySelector(".initialList").append(list);
     var listValue = document.querySelector("input[type=text]").value;//submitted initials
     list.append(listValue);
-    console.log(listValue);
 
     var timeValue = document.querySelector("#count");
     list.append("  ---- ",timeValue);
-
 };
 
-// Add Initials
+// Add Initials eventlistener
 finish.addEventListener("submit", function(e){
     e.preventDefault();
 
@@ -242,9 +236,58 @@ finish.addEventListener("submit", function(e){
         saveScores();
         displayScores();
     };
-
 });
 
+//Local Storage Functions
+var savedScoresArray = [];
+
+function saveScores() {
+    if(scoresList.className === "reveal") {
+        var userScore = {
+            initials: document.querySelector("input[type=text]").value, //same as intialList
+            timeScore: secondsLeft
+        };
+        
+        if(localStorage.userScoresArray != null) {
+            console.log(localStorage.userScoresArray);
+           
+            savedScoresArray = JSON.parse(localStorage.getItem("userScoresArray")); //now contains what was in local storage
+            savedScoresArray.push(userScore); //pushing new object into array
+            localStorage.setItem("userScoresArray", JSON.stringify(savedScoresArray)); //sending array back into local storage
+       } else {
+        savedScoresArray.push(userScore); //add new object into array
+        localStorage.setItem("userScoresArray", JSON.stringify(savedScoresArray));//send array to local storage
+       };
+    };
+};
+
+function displayScores() {
+  
+    var savedScores = JSON.parse(localStorage.getItem("userScoresArray")); //converting array saved in local storage back to object
+    // console.log(savedScores); //this is the whole array
+    // var scoresObj = {name: savedScores[0].initials, score: savedScores[0].timeScore};//pulling values from object
+    // console.log(scoresObj);  //this is one object inside the array
+
+    if (savedScores !== null) {
+        var highScoresUl = document.querySelector(".highscoresList");
+        highScoresUl.innerHTML= "~Past Highscores~";
+        highScoresUl.setAttribute("class", "reveal");
+        highScoresUl.setAttribute("style", "background-color: purple; opacity:85%; font-weight:bold; color:white; width: 300px; margin-left:18px; border-radius:5px;");
+
+        //For loop to create li for every saved entry in the array
+        for (var index = 0; index < savedScores.length; index ++) {
+            var user = savedScores[index].initials + " ---- " + savedScores[index].timeScore; //at index of savedScores, get value of initials and timescore
+            console.log(user);
+    
+            var userList = document.createElement("li");
+            userList.textContent= user;
+    
+            highScoresUl.append(userList); //add the values in user to li
+        };
+    } else {
+        return;
+    };
+};
 
 // Highscores Page, Back Button
 goBack.addEventListener("click", function(e){
@@ -259,67 +302,12 @@ goBack.addEventListener("click", function(e){
 //Reset Highscores
 resetHS.addEventListener("click", function(e){
     e.preventDefault();
-
-    document.querySelector(".initialList").remove();//this removes the ul of initialList t.ly/MplN
-    //need to add to function to clear local storage here too
     
-});
-
-//Local Storage Functions
-var savedScoresArray = [];
-
-function saveScores() {
-  //  debugger
-    if(scoresList.className === "reveal") {
-        var userScore = {
-            initials: document.querySelector("input[type=text]").value, //same as intialList
-            timeScore: secondsLeft
-        };
-        // console.log("Initials: " + userScore.initials + " , Timescore: " + userScore.timeScore + " , JSON Stringify: " + JSON.stringify(userScore));
-       
-        localStorage.setItem("userScore", JSON.stringify(userScore)); //turns to string
-       
+    if(localStorage !== null){
+        location.reload();
     };
-};
 
-function displayScores() {
-   // debugger
-    
-    var savedScores = JSON.parse(localStorage.getItem("userScore")); //turns back to object
-
-    console.log(savedScores); 
-
-    var scoresObj = {name: savedScores.initials, score: savedScores.timeScore}; // places values of saved scores into new object
-    savedScoresArray.push(scoresObj); //pushes this into the array
-
-    //this part is experiment for past scores. Maybe put in saveScores function instead
-    localStorage.setItem("scoresObj", JSON.stringify(scoresObj));
-    var scoresObjAdd = JSON.parse(localStorage.getItem("scoresObj"));
-    savedScoresArray.push(scoresObjAdd);
-    console.log(savedScoresArray);
-    //experiment ends here
-
-    var highScoresUl = document.querySelector(".highscoresList");
-    highScoresUl.innerHTML= "~Past Highscores~";
-    // var highscoresTxt = document.querySelector("#highscoresTxt");
-   
-    if (savedScoresArray !== null) {
-        highScoresUl.setAttribute("class", "reveal");
-        highScoresUl.setAttribute("style", "background-color: teal; opacity:85%; font-weight:bold; color:white; width: 300px; margin-left:18px; border-radius:5px;")
-
-        //For loop to create li for every saved entry
-        for (var index = 0; index < savedScoresArray.length; index ++) {
-            var user = savedScoresArray[index].name + " ---- " + savedScoresArray[index].score; //in the array, get name and score values
-        };
-
-        var userList = document.createElement("li");
-        userList.textContent= user;
-
-        highScoresUl.append(userList); //add the values in user to li
-    } else {
-        return;
-    }
-};
-
+    localStorage.clear();
+});
 
 

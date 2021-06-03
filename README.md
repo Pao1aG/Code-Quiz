@@ -21,4 +21,4 @@ Access the webpage here:
 
 ## Images
 
-![Screenshot of Code Quiz]()
+![Screenshot of Code Quiz](assets\images\codeQuiz_screenshot.png)
